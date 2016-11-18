@@ -16,6 +16,7 @@
     tasks_from: get_url
 
 - name: Install required packages
+  tags: consul_replicate
   become: true
   with_items: "{{ consul_replicate_packages }}"
   package:
@@ -23,20 +24,33 @@
     name: "{{ item }}"
 
 - name: Create basedir for consul-replicate
+  tags: consul_replicate
   become: true
   file:
     state: directory
     path: "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}"
 
 - name: Upload consul-replicate
+  tags: consul_replicate
   become: true
   unarchive:
     src: "{{ lib_persistent_data_path_local }}/{{ consul_replicate_versions[consul_replicate_version].url|basename}}"
     dest: "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}"
 
 - name: Create link in $PATH for consul-replicate
+  tags: consul_replicate
   become: true
   file:
     state: link
     dest: "{{ consul_replicate_bindir }}/consul-replicate"
     src:  "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}/consul-replicate"
+
+- name: Deploy unitfile
+  tags: consul_replicate
+  become: true
+  notify:
+    - systemctl daemon-reload
+    - restart consul-replicate
+  template:
+    src: consul-replicate.service.j2
+    dest: /etc/systemd/system/consul-replicate.service

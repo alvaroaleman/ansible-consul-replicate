@@ -73,9 +73,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
         ansible.raw_arguments << '--check'
       end
 
-      if ENV['ANSIBLE_CONSULREPLICATE_VAGRANT_ANSIBLE_DIFFMODE'] == '1' or c['provisioner']['ansible']['diff']
-        ansible.raw_arguments << '--diff'
-      end
+      ansible.raw_arguments << '--diff'
 
     end
 

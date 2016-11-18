@@ -1,6 +1,10 @@
 ---
 - name: Test silpion/ansible-consul-replicate
   hosts: all
+  vars:
+    consul_replicate_consulhost: 'https://demo.consul.io:8500'
+    consul_replicate_additional_opts:
+      - '-max-stale 5'
   pre_tasks:
     - name: Install aliases
       become: true

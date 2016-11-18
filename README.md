@@ -1,45 +1,23 @@
-# silpion/ansible-consul-replicate
+# ansible-consul-replicate
 
 ## Synopsis
 
-Synopsis...
-
-## Description
-
-Description...
-
-## Requirements
-
-Requirements...
+```yml
+- hosts: all
+  vars:
+    consul_replicate_consulhost: 'https://consul.tld.com'
+    consul_replicate_additional_opts:
+      - '-foo bar'
+  roles:
+    alvaroaleman.consul-replicate
+```
 
 ## Role Variables
 
-* ``variable_name``: Variable description (<!variable type>, default: ``variable default value``)
-
-### complex_variable_name
-
-Complex variable documentation...
-
-### another_complex_variable_name
-
-Complex variable documentation...
-
-## Dependencies
-
-Dependencies...
-
-### Dependency variables
-
-Dependency variables documentation...
-
-## Example Playbook
-
-```yaml
-- name: Test silpion/ansible-consul-replicate
-  hosts: all
-  roles:
-    - ansible-consul-replicate
-```
+* ``consul_replicate_version``: Version of consul-replicate to install (default: ``0.2.0``)
+* ``consul_replicate_bindir``: Directory in which to create subdirs for each consul-replicate version and a link to the current version (default: ``/usr/local/bin``)
+* ``consul_replicate_consulhost``: Address of consul (default: ``127.0.0.1:8500``)
+* ``consul_replicate_additional_opts``: Addiotional CLI opts to pass to consul-replicate (default: ``[]``)
 
 ## Contributing
 
@@ -54,30 +32,8 @@ branch and create pull requests back to the origin ``next`` branch.
 
 AGPLv3
 
-## Integration testing
-
-This role provides integration tests using the Ruby RSpec/serverspec framework
-with a few drawbacks at the time of writing this documentation.
-
-Running integration tests requires a number of dependencies being
-installed. As this role uses Ruby RSpec there is the need to have
-Ruby with rake and bundler available.
-
-```shell
-# install role specific dependencies with bundler
-bundle install
-```
-
-<!-- -->
-
-```shell
-rake suite
-```
-
-
 ## Author information
 
-<!Author Name> @<!email_prefix> <!email_suffix>
-
+* Alvaro Aleman
 
 <!-- vim: set nofen ts=4 sw=4 et: -->

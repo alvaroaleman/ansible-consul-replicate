@@ -1,5 +1,5 @@
 ---
-- name: Test silpion/ansible-consul-replicate
+- name: Test ansible-consul-replicate
   hosts: all
   vars:
     consul_replicate_consulhost: 'https://demo.consul.io:8500'

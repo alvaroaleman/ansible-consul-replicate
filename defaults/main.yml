@@ -1,2 +1,4 @@
 ---
 # defaults file for ansible-consul-replicate
+consul_replicate_version: '0.2.0'
+consul_replicate_bindir: /usr/local/bin

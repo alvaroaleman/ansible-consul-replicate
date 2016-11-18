@@ -52,7 +52,7 @@ branch and create pull requests back to the origin ``next`` branch.
 
 ## License
 
-Apache Version 2.0
+AGPLv3
 
 ## Integration testing
 

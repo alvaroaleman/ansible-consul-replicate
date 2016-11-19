@@ -1,49 +1,51 @@
 ---
-- name: Include datapersistency tasks
-  tags: consul_replicate
-  include_role:
-    name: silpion.lib
-    tasks_from: datapersistency
+- when: consul_replicate_install_binary
+  block:
+    - name: Include datapersistency tasks
+      tags: consul_replicate
+      include_role:
+        name: silpion.lib
+        tasks_from: datapersistency
 
-- name: Download consul-replicate
-  tags: consul_replicate
-  vars:
-    url: "{{ consul_replicate_versions[consul_replicate_version].url }}"
-    checksum: "{{ consul_replicate_versions[consul_replicate_version].checksum }}"
-    filename: "{{ consul_replicate_versions[consul_replicate_version].url|basename }}"
-  include_role:
-    name: silpion.lib
-    tasks_from: get_url
+    - name: Download consul-replicate
+      tags: consul_replicate
+      vars:
+        url: "{{ consul_replicate_versions[consul_replicate_version].url }}"
+        checksum: "{{ consul_replicate_versions[consul_replicate_version].checksum }}"
+        filename: "{{ consul_replicate_versions[consul_replicate_version].url|basename }}"
+      include_role:
+        name: silpion.lib
+        tasks_from: get_url
 
-- name: Install required packages
-  tags: consul_replicate
-  become: true
-  with_items: "{{ consul_replicate_packages }}"
-  package:
-    state: present
-    name: "{{ item }}"
+    - name: Install required packages
+      tags: consul_replicate
+      become: true
+      with_items: "{{ consul_replicate_packages }}"
+      package:
+        state: present
+        name: "{{ item }}"
 
-- name: Create basedir for consul-replicate
-  tags: consul_replicate
-  become: true
-  file:
-    state: directory
-    path: "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}"
+    - name: Create basedir for consul-replicate
+      tags: consul_replicate
+      become: true
+      file:
+        state: directory
+        path: "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}"
 
-- name: Upload consul-replicate
-  tags: consul_replicate
-  become: true
-  unarchive:
-    src: "{{ lib_persistent_data_path_local }}/{{ consul_replicate_versions[consul_replicate_version].url|basename}}"
-    dest: "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}"
+    - name: Upload consul-replicate
+      tags: consul_replicate
+      become: true
+      unarchive:
+        src: "{{ lib_persistent_data_path_local }}/{{ consul_replicate_versions[consul_replicate_version].url|basename}}"
+        dest: "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}"
 
-- name: Create link in $PATH for consul-replicate
-  tags: consul_replicate
-  become: true
-  file:
-    state: link
-    dest: "{{ consul_replicate_bindir }}/consul-replicate"
-    src:  "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}/consul-replicate"
+    - name: Create link in $PATH for consul-replicate
+      tags: consul_replicate
+      become: true
+      file:
+        state: link
+        dest: "{{ consul_replicate_bindir }}/consul-replicate"
+        src:  "{{ consul_replicate_bindir }}/consul-replicate_{{ consul_replicate_version }}/consul-replicate"
 
 - name: Deploy unitfile
   tags: consul_replicate

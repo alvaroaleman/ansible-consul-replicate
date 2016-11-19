@@ -1,6 +1,7 @@
 ---
 # defaults file for ansible-consul-replicate
 consul_replicate_version: '0.2.0'
+consul_replicate_install_binary: true
 consul_replicate_bindir: /usr/local/bin
 consul_replicate_consulhost: '127.0.0.1:8500'
 consul_replicate_additional_opts: []

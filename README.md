@@ -18,6 +18,7 @@
 * ``consul_replicate_bindir``: Directory in which to create subdirs for each consul-replicate version and a link to the current version (default: ``/usr/local/bin``)
 * ``consul_replicate_consulhost``: Address of consul (default: ``127.0.0.1:8500``)
 * ``consul_replicate_additional_opts``: Addiotional CLI opts to pass to consul-replicate (default: ``[]``)
+* ``consul_replicate_install_binary``: Whether to install the consu-replicate binary, may be undesired when using an unreleased version. Requires a consul-replicate binary in ``/usr/local/bin`` when set to ``false`` (default: ``true``)
 
 ## Contributing
 

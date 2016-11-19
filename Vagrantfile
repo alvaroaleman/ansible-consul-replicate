@@ -49,9 +49,9 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     # provisioner configuration
     d.vm.provision :ansible do |ansible|
       # configure ansible-galaxy
-      ansible.galaxy_roles_path = 'tests/roles/:../'
-      ansible.galaxy_role_file = 'tests/requirements.yml'
-      ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=tests/roles/ --ignore-errors --force'
+      #ansible.galaxy_roles_path = 'tests/roles/:../'
+      #ansible.galaxy_role_file = 'tests/requirements.yml'
+      #ansible.galaxy_command = 'ansible-galaxy install --role-file=%{role_file} --roles-path=tests/roles/ --ignore-errors --force'
 
       # configure ansible-playbook
       ansible.playbook = 'tests/test.yml'
@@ -73,9 +73,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
         ansible.raw_arguments << '--check'
       end
 
-      if ENV['ANSIBLE_CONSULREPLICATE_VAGRANT_ANSIBLE_DIFFMODE'] == '1' or c['provisioner']['ansible']['diff']
-        ansible.raw_arguments << '--diff'
-      end
+      ansible.raw_arguments << '--diff'
 
     end
 

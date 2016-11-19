@@ -1,2 +1,12 @@
 ---
 # handlers file for ansible-consul-replicate
+- name: systemctl daemon-reload
+  become: true
+  command: systemctl daemon-reload
+
+- name: restart consul-replicate
+  become: true
+  service:
+    state: restarted
+    name: consul-replicate
+    enabled: true

@@ -1,10 +1,8 @@
 ---
 galaxy_info:
-  author:
-  description:
-  company: "Silpion (http://silpion.de)"
-  license: "Apache 2"
-  min_ansible_version: "2.0.0.2"
+  author: "Alvaro Aleman"
+  license: "AGPL v3"
+  min_ansible_version: "2.2.0.0"
   issue_tracker_url:
   github_branch: next
   galaxy_tags: []

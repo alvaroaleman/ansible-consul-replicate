@@ -1,0 +1,16 @@
+[Unit]
+Description=Consul-Replicate
+Documentation=https://github.com/hashicorp/consul-replicate
+After=network.target
+
+[Service]
+ExecStart={{ consul_replicate_bindir }}/consul-replicate \
+  -consul {{ consul_replicate_consulhost }}{% if consul_replicate_additional_opts|length > 0 %} \{% endif %}
+
+{% for opt in consul_replicate_additional_opts %}
+  {{ opt }}{% if not loop.last %} \{% endif %}
+
+{% endfor %}
+
+[Install]
+WantedBy=default.target
